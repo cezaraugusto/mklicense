@@ -1,0 +1,45 @@
+{
+  "name": "mklicense",
+  "version": "0.0.1",
+  "description": "CLI tool for building Licenses files. Easily.",
+  "license": "MIT",
+  "repository": "cezaraugusto/mklicense",
+  "author": {
+    "name": "Cezar Augusto",
+    "email": "cezaraugusto@outlook.it",
+    "url": "cezaraugusto.net"
+  },
+  "engines": {
+    "node": ">=0.12.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "cli",
+    "tool",
+    "license",
+    "licenses",
+    "public domain",
+    "nonlicense",
+    "unlicense",
+    "mit",
+    "apache",
+    "mpl",
+    "gpl",
+    "lgpl",
+    "agpl"
+  ],
+  "dependencies": {
+    "cli-spinner": "^0.2.5",
+    "git-user-name": "^1.2.0",
+    "inquirer": "^1.0.2",
+    "node-jsdom": "^3.1.5"
+  },
+  "devDependencies": {
+    "standard": "^6.0.8"
+  }
+}
