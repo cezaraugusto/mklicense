@@ -2,7 +2,9 @@
 
 > CLI tool for generating Licenses. Easily.
 
-<p align="center"><img src="demo.gif"></p>
+<br>
+<p align="center"><img src="demo.gif" width="640" height="400"></p>
+<br>
 
 ## Why should I use this?
 
