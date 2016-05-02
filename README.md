@@ -2,6 +2,8 @@
 
 > CLI tool for generating Licenses. Easily.
 
+<p align="center"><img src="demo.gif"></p>
+
 ## Why should I use this?
 
 * Licenses are boring;
