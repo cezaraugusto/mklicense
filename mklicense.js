@@ -4,7 +4,7 @@
 var fs = require('fs')
 var path = require('path')
 var inquirer = require('inquirer')
-var jsdom = require('node-jsdom')
+var jsdom = require('jsdom')
 var username = require('git-user-name')
 var Spinner = require('cli-spinner').Spinner
 
