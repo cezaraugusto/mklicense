@@ -10,7 +10,7 @@
     "url": "cezaraugusto.net"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=4.0"
   },
   "bin": {
     "mklicense": "./mklicense.js"

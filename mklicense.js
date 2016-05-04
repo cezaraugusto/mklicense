@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 'use strict'
+// validar ES6
+// condicional pra versao do node
+// console antes de baixar isso ser show
+const fs = require('fs')
+const path = require('path')
+const inquirer = require('inquirer')
+const jsdom = require('jsdom')
+const username = require('git-user-name')
+const Spinner = require('cli-spinner').Spinner
 
-var fs = require('fs')
-var path = require('path')
-var inquirer = require('inquirer')
-var jsdom = require('jsdom')
-var username = require('git-user-name')
-var Spinner = require('cli-spinner').Spinner
-
-var loading = new Spinner('%s generating license')
-
+let loading = new Spinner('%s generating license')
 loading.setSpinnerString('⣾⣽⣻⢿⡿⣟⣯⣷')
 loading.setSpinnerDelay(100)
 
@@ -30,12 +31,12 @@ inquirer.prompt([
     name: 'license_year',
     message: 'The project\'s license begins in:',
     default: function () {
-      var getTheDate = new Date()
-      var currentYear = getTheDate.getFullYear()
+      let getTheDate = new Date()
+      let currentYear = getTheDate.getFullYear()
       return currentYear
     },
     when: function (answers) {
-      var licenseOption = answers.licenseList
+      let licenseOption = answers.licenseList
       if (licenseOption.match(/(mit|apache|^gpl|agpl)/)) {
         return licenseOption
       }
@@ -49,7 +50,7 @@ inquirer.prompt([
       return username()
     },
     when: function (answers) {
-      var licenseOption = answers.licenseList
+      let licenseOption = answers.licenseList
       if (licenseOption.match(/(mit|apache|^gpl|agpl)/)) {
         return licenseOption
       }
@@ -63,111 +64,86 @@ inquirer.prompt([
       return 'mkdocs. A CLI tool that generates your next project\'s License. Available on NPM.'
     },
     when: function (answers) {
-      var licenseOption = answers.licenseList
+      let licenseOption = answers.licenseList
       if (licenseOption.match(/(^gpl|agpl)/)) {
         return licenseOption
       }
     }
   }
 ]).then(function (answers) {
+  const thisLicense = answers.licenseList
+  const licenseUrl = 'http://choosealicense.com/licenses/' + thisLicense
+  const whereIsMyLicense = path.resolve('.')
+
   loading.start()
 
-  var thisLicense = answers.licenseList
-  var licenseUrl = 'http://choosealicense.com/licenses/' + thisLicense
-
-  jsdom.env({
-    url: licenseUrl,
-    loaded: function (errors, window) {
-      if (errors) {
-        console.log('Error downloading license:', errors)
+  jsdom.env(
+    licenseUrl,
+    function (err, window) {
+      const license = window.document.getElementById('license-text').textContent
+      if (err) {
+        console.log('Getting the license was not possible. Error: ', err)
       }
-      var license = window.document.getElementById('license-text').textContent
-
-      var customizer = function () {
-        var rewrite
-        switch (thisLicense) {
-          case 'mit':
-            rewrite = license.replace(
-              '[year]',
-              answers.license_year
+      let customizer = function (thisLicense) {
+        let rewrite = {
+          'mit': function() {
+            return license.replace(
+              '[year]', answers.license_year
             )
             .replace(
-              '[fullname]',
-              answers.author_name
+              '[fullname]', answers.author_name
             )
-            return rewrite
-
-          case 'apache-2.0':
-            rewrite = license.replace(
-                '{yyyy}',
-                answers.license_year
+          },
+          'apache-2.0': function() {
+            return license.replace(
+                '{yyyy}', answers.license_year
               )
               .replace(
-                '{name of copyright owner}',
-                answers.author_name
+                '{name of copyright owner}', answers.author_name
               )
-            return rewrite
-
-          case 'gpl-3.0':
-            rewrite = license.replace(
-                '{year}',
-                answers.license_year
+          },
+          'gpl-3.0': function() {
+            return license.replace(
+                '{year}', answers.license_year
               )
               .replace(
-                '{name of author}',
-                answers.author_name
+                '{name of author}', answers.author_name
               )
               .replace(
-                '{fullname}',
-                answers.author_name
+                '{fullname}', answers.author_name
               )
               .replace(
-                '{project}',
-                answers.project_name
+                '{project}', answers.project_name
               )
               .replace(
-                '{one line to give the program\'s name and a brief idea of what it does.}',
-                answers.project_description
+                '{one line to give the program\'s name and a brief idea of what it does.}', answers.project_description
               )
-            return rewrite
-
-          case 'agpl-3.0':
-            rewrite = license.replace(
-              '<year>',
-              answers.license_year
+          },
+          'agpl-3.0': function() {
+            return license.replace(
+              '<year>', answers.license_year
             )
             .replace(
-              '<name of author>',
-              answers.author_name
+              '<name of author>', answers.author_name
             )
             .replace(
-              '<one line to give the program\'s name and a brief idea of what it does.>',
-              answers.project_description
+              '<one line to give the program\'s name and a brief idea of what it does.>', answers.project_description
             )
-            return rewrite
-
-          case 'unlicense':
-          case 'mpl-2.0':
-          case 'lgpl':
-            return rewrite
-
-          default:
+          },
+          'default': function() {
             return license
-        }
+          }
+        }; //default para unlicense, mpl-2.0 e lgpl
+        return (rewrite[thisLicense] || rewrite['default'])()
+
       }
-      fs.writeFile('LICENSE', customizer(), 'UTF-8', function (err) {
+      fs.writeFile('LICENSE', customizer(thisLicense), 'UTF-8', function (err) {
         if (err) {
           return console.log('error creating license', err)
         }
+        loading.stop(true)
+        console.log('Done. license created!\nYour license is under: ' + whereIsMyLicense + '\nLawyers are now happy.')
       })
-    },
-    done: function (errors, window) {
-      var whereIsMyLicense = path.resolve('.')
-      if (errors) {
-        console.log('Error while transfering the content for your file', errors)
-      }
-      loading.stop(true)
-      console.log('Done. license created!\nYour license is under: ' + whereIsMyLicense + '\nLawyers are now happy.')
     }
-  })
+  )
 })
