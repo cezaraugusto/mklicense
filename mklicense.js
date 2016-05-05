@@ -86,7 +86,7 @@ inquirer.prompt([
       }
       let customizer = function (thisLicense) {
         let rewrite = {
-          'mit': function() {
+          'mit': function () {
             return license.replace(
               '[year]', answers.license_year
             )
@@ -94,7 +94,7 @@ inquirer.prompt([
               '[fullname]', answers.author_name
             )
           },
-          'apache-2.0': function() {
+          'apache-2.0': function () {
             return license.replace(
                 '{yyyy}', answers.license_year
               )
@@ -102,7 +102,7 @@ inquirer.prompt([
                 '{name of copyright owner}', answers.author_name
               )
           },
-          'gpl-3.0': function() {
+          'gpl-3.0': function () {
             return license.replace(
                 '{year}', answers.license_year
               )
@@ -119,7 +119,7 @@ inquirer.prompt([
                 '{one line to give the program\'s name and a brief idea of what it does.}', answers.project_description
               )
           },
-          'agpl-3.0': function() {
+          'agpl-3.0': function () {
             return license.replace(
               '<year>', answers.license_year
             )
@@ -130,12 +130,11 @@ inquirer.prompt([
               '<one line to give the program\'s name and a brief idea of what it does.>', answers.project_description
             )
           },
-          'default': function() {
+          'default': function () {
             return license
           }
-        }; //default para unlicense, mpl-2.0 e lgpl
+        }
         return (rewrite[thisLicense] || rewrite['default'])()
-
       }
       fs.writeFile('LICENSE', customizer(thisLicense), 'UTF-8', function (err) {
         if (err) {
