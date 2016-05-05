@@ -16,7 +16,7 @@
     "mklicense": "./mklicense.js"
   },
   "scripts": {
-    "test": "standard && node mklicense.js"
+    "test": "standard mklicense.js"
   },
   "files": [
     "mklicense.js"
