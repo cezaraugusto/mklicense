@@ -39,7 +39,7 @@
   "dependencies": {
     "cli-spinner": "^0.2.5",
     "git-user-name": "^1.2.0",
-    "inquirer": "^1.0.2",
+    "inquirer": "^6.3.1",
     "jsdom": "^8.5.0"
   },
   "devDependencies": {
