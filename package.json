@@ -46,7 +46,7 @@
     "snyk": "^1.192.0"
   },
   "devDependencies": {
-    "standard": "^6.0.8"
+    "standard": "^12.0.1"
   },
   "snyk": true
 }
