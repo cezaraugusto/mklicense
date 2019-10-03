@@ -30,3 +30,8 @@ patch:
         patched: '2019-07-04T19:36:12.614Z'
     - jsdom > request-promise-native > request-promise-core > lodash:
         patched: '2019-07-09T13:53:22.582Z'
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - snyk > proxy-agent > https-proxy-agent:
+        patched: '2019-10-03T23:48:57.371Z'
+    - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
+        patched: '2019-10-03T23:48:57.371Z'
