@@ -43,7 +43,7 @@
     "git-user-name": "^2.0.0",
     "inquirer": "^6.3.1",
     "jsdom": "^15.1.1",
-    "snyk": "^1.192.4"
+    "snyk": "^1.258.2"
   },
   "devDependencies": {
     "standard": "^14.1.0"
