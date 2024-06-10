@@ -41,7 +41,7 @@
   "dependencies": {
     "cli-spinner": "^0.2.5",
     "git-user-name": "^2.0.0",
-    "inquirer": "^6.3.1",
+    "inquirer": "^6.5.2",
     "jsdom": "^15.1.1",
     "snyk": "^1.996.0"
   },
