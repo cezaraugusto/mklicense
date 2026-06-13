@@ -46,7 +46,7 @@ export function customizeLicense(
 }
 
 /**
- * Fetch a license template from the GitHub Licenses API —
+ * Fetch a license template from the GitHub Licenses API,
  * the same templates choosealicense.com serves.
  */
 export async function fetchLicense(licenseKey: string): Promise<string> {
