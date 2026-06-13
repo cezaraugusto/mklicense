@@ -1,28 +1,46 @@
 {
   "name": "mklicense",
-  "version": "0.1.5",
+  "version": "0.3.0",
   "description": "CLI tool for building Licenses files. Easily.",
   "license": "MIT",
   "repository": "cezaraugusto/mklicense",
   "author": {
     "name": "Cezar Augusto",
-    "email": "cezaraugusto@outlook.it",
-    "url": "cezaraugusto.net"
+    "email": "boss@cezaraugusto.net",
+    "url": "https://cezaraugusto.net"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=18"
   },
+  "type": "module",
   "bin": {
-    "mklicense": "./mklicense.js"
+    "mklicense": "bin.js"
   },
-  "scripts": {
-    "test": "standard mklicense.js",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
   "files": [
-    "mklicense.js"
+    "dist",
+    "bin.js"
   ],
+  "scripts": {
+    "build": "rslib build",
+    "check": "biome check --write",
+    "dev": "rslib build --watch",
+    "format": "biome format --write",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build",
+    "publish:provenance": "np patch --no-tests --any-branch --yolo --message 'release: %s' --provenance"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
   "keywords": [
     "cli",
     "tool",
@@ -39,14 +57,16 @@
     "agpl"
   ],
   "dependencies": {
-    "cli-spinner": "^0.2.5",
+    "cli-spinner": "^0.2.10",
     "git-user-name": "^2.0.0",
-    "inquirer": "^6.3.1",
-    "jsdom": "^15.1.1",
-    "snyk": "^1.996.0"
+    "inquirer": "^6.5.2",
+    "log-md": "^0.7.0"
   },
   "devDependencies": {
-    "standard": "^14.1.0"
-  },
-  "snyk": true
+    "@biomejs/biome": "^1.9.4",
+    "@rslib/core": "^0.6.9",
+    "@types/node": "^22.8.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.3"
+  }
 }
