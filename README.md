@@ -1,6 +1,13 @@
-# mklicense [![MIT license](https://img.shields.io/badge/mit-license-orange.svg)](https://opensource.org/licenses/MIT) [![Travis](https://img.shields.io/travis/cezaraugusto/mklicense.svg)](http://github.com/cezaraugusto/mklicense) [![npm](https://img.shields.io/npm/dt/mklicense.svg?maxAge=2592000)](https://www.npmjs.com/package/mklicense)
+[npm-version-image]: https://img.shields.io/npm/v/mklicense.svg?color=0971fe
+[npm-version-url]: https://www.npmjs.com/package/mklicense
+[npm-downloads-image]: https://img.shields.io/npm/dm/mklicense.svg?color=2ecc40
+[npm-downloads-url]: https://www.npmjs.com/package/mklicense
+[action-image]: https://github.com/cezaraugusto/mklicense/actions/workflows/ci.yml/badge.svg?branch=main
+[action-url]: https://github.com/cezaraugusto/mklicense/actions
 
-> CLI tool for generating Licenses. Easily.
+> CLI tool for building Licenses files. Easily.
+
+# mklicense [![Version][npm-version-image]][npm-version-url] [![Downloads][npm-downloads-image]][npm-downloads-url] [![workflow][action-image]][action-url]
 
 <br>
 <p align="center"><img src="demo.gif" width="640" height="400"></p>
@@ -56,4 +63,4 @@ Since its version 0.1.4, `mklicense` needs `Node` version `>=4` to run properly.
 
 ## License
 
-MIT © [Cezar Augusto](http://cezaraugusto.net)
+MIT (c) Cezar Augusto.
