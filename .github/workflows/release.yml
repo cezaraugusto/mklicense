@@ -1,0 +1,73 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Exact version to publish (e.g., 1.0.1). Required."
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies (allow lockfile update)
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Configure git user for CI
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Ensure clean lockfile before versioning
+        run: |
+          # If pnpm updated the lockfile, restore it to keep the tree clean for versioning
+          git restore --source=HEAD --staged --worktree pnpm-lock.yaml || git checkout -- pnpm-lock.yaml || true
+
+      - name: Publish using np with provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
+        run: |
+          RAW_VERSION='${{ inputs.version }}'
+          VERSION=$(echo "$RAW_VERSION" | xargs)
+          if [ -z "$VERSION" ]; then
+            echo "Error: version input is required" >&2
+            exit 1
+          fi
+          if ! echo "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$'; then
+            echo "Error: provided version '$VERSION' is not valid semver" >&2
+            exit 1
+          fi
+          echo "Publishing exact version: $VERSION"
+          if git ls-remote --tags origin | grep -q "refs/tags/v$VERSION$"; then
+            echo "Error: tag v$VERSION already exists on origin. Choose a new version." >&2
+            exit 1
+          fi
+          npm version "$VERSION" -m "release: %s"
+          git push --follow-tags
+          npm publish --provenance --access public
+
