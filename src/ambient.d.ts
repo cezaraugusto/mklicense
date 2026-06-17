@@ -10,22 +10,24 @@ declare module 'inquirer' {
   }
   const inquirer: {
     prompt(questions: Question[]): Promise<Record<string, string>>;
-  };
-  export default inquirer;
+  }
+
+  export default inquirer
 }
 
 declare module 'git-user-name' {
-  export default function username(): string | null;
+  export default function username (): string | null
 }
 
 declare module 'cli-spinner' {
   export class Spinner {
-    constructor(text?: string);
-    setSpinnerString(spinnerString: string): void;
-    setSpinnerDelay(delay: number): void;
-    start(): void;
-    stop(clear?: boolean): void;
+    constructor (text?: string)
+    setSpinnerString (spinnerString: string): void
+    setSpinnerDelay (delay: number): void
+    start (): void
+    stop (clear?: boolean): void
   }
-  const cliSpinner: { Spinner: typeof Spinner };
-  export default cliSpinner;
+  const cliSpinner: {Spinner: typeof Spinner}
+
+  export default cliSpinner
 }

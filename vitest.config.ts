@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config';
+import {defineConfig} from 'vitest/config'
 
 export default defineConfig({
   // Configure Vitest (https://vitest.dev/config/)
@@ -8,11 +8,11 @@ export default defineConfig({
     poolOptions: {
       forks: {
         singleFork: true,
-        isolate: false,
-      },
+        isolate: false
+      }
     },
     fileParallelism: false,
     maxWorkers: 1,
-    minWorkers: 1,
-  },
-});
+    minWorkers: 1
+  }
+})
