@@ -57,9 +57,8 @@
     "agpl"
   ],
   "dependencies": {
+    "@inquirer/prompts": "^7.2.0",
     "cli-spinner": "^0.2.10",
-    "git-user-name": "^2.0.0",
-    "inquirer": "^6.5.2",
     "log-md": "^0.7.0"
   },
   "devDependencies": {

@@ -1,9 +1,9 @@
+import {execSync} from 'node:child_process'
 import * as fs from 'node:fs/promises'
 import * as path from 'node:path'
 
+import {input, select} from '@inquirer/prompts'
 import cliSpinner from 'cli-spinner'
-import username from 'git-user-name'
-import inquirer from 'inquirer'
 import log from 'log-md'
 
 const {Spinner} = cliSpinner
@@ -68,53 +68,52 @@ export async function fetchLicense (licenseKey: string): Promise<string> {
   return data.body
 }
 
-const questions = [
-  {
-    type: 'list',
-    name: 'licenseList',
-    message: 'Select your license:',
-    choices: [
-      'Unlicense',
-      'MIT',
-      'Apache 2.0',
-      'MPL 2.0',
-      'LGPL 3.0',
-      'GPL 3.0',
-      'AGPL 3.0'
-    ],
-    filter: (value: string) => value.toLowerCase().replace(/ /g, '-')
-  },
-  {
-    type: 'input',
-    name: 'license_year',
-    message: "The project's license begins in:",
-    default: () => new Date().getFullYear(),
-    when: (answers: Record<string, string>) =>
-      answers.licenseList.match(/(mit|apache|^gpl|agpl)/)
-  },
-  {
-    type: 'input',
-    name: 'author_name',
-    message: "The project's author full name:",
-    default: () => username() || '',
-    when: (answers: Record<string, string>) =>
-      answers.licenseList.match(/(mit|apache|^gpl|agpl)/)
-  },
-  {
-    type: 'input',
-    name: 'project_description',
-    message:
-      "Give the project's name and a brief idea of what it does (one line):\n",
-    default: () =>
-      "mkdocs. A CLI tool that generates your next project's License. Available on NPM.",
-    when: (answers: Record<string, string>) =>
-      answers.licenseList.match(/(^gpl|agpl)/)
+/** Resolve the git user's name without external dependencies. */
+function gitUserName (): string {
+  try {
+    return execSync('git config user.name', {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    }).trim()
+  } catch {
+    return ''
   }
+}
+
+const choices = [
+  {name: 'Unlicense', value: 'unlicense'},
+  {name: 'MIT', value: 'mit'},
+  {name: 'Apache 2.0', value: 'apache-2.0'},
+  {name: 'MPL 2.0', value: 'mpl-2.0'},
+  {name: 'LGPL 3.0', value: 'lgpl-3.0'},
+  {name: 'GPL 3.0', value: 'gpl-3.0'},
+  {name: 'AGPL 3.0', value: 'agpl-3.0'}
 ]
 
 /** Run the interactive CLI: prompt, fetch, customize, write LICENSE. */
 export default async function run (): Promise<void> {
-  const answers = (await inquirer.prompt(questions)) as unknown as LicenseAnswers
+  const licenseList = await select({message: 'Select your license:', choices})
+  const answers: LicenseAnswers = {licenseList}
+
+  if (/(mit|apache|^gpl|agpl)/.test(licenseList)) {
+    answers.license_year = await input({
+      message: "The project's license begins in:",
+      default: String(new Date().getFullYear())
+    })
+    answers.author_name = await input({
+      message: "The project's author full name:",
+      default: gitUserName()
+    })
+  }
+
+  if (/(^gpl|agpl)/.test(licenseList)) {
+    answers.project_description = await input({
+      message:
+        "Give the project's name and a brief idea of what it does (one line):",
+      default:
+        "mkdocs. A CLI tool that generates your next project's License. Available on NPM."
+    })
+  }
 
   const spinner = new Spinner('%s generating license')
 
