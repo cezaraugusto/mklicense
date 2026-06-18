@@ -45,6 +45,15 @@ $ mklicense
 Since its version 0.1.4, `mklicense` needs `Node` version `>=4` to run properly.
 
 
+## Related projects
+
+* [pintor](https://github.com/cezaraugusto/pintor)
+* [log-md](https://github.com/cezaraugusto/log-md)
+* [prefers-yarn](https://github.com/cezaraugusto/prefers-yarn)
+* [go-git-it](https://github.com/cezaraugusto/go-git-it)
+* [git-precision](https://github.com/cezaraugusto/git-precision)
+* [isolated-deps](https://github.com/cezaraugusto/isolated-deps)
+
 ## Licenses included
 
 * Unlicense
