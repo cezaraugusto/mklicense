@@ -3,6 +3,7 @@ import {defineConfig} from 'vitest/config'
 export default defineConfig({
   // Configure Vitest (https://vitest.dev/config/)
   test: {
+    globals: true,
     // Avoid Node.js 23 + tinypool recursion by using process forks
     pool: 'forks',
     poolOptions: {
