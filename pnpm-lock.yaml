@@ -16,7 +16,7 @@ importers:
         version: 0.2.10
       log-md:
         specifier: ^0.7.0
-        version: 0.7.0
+        version: 0.7.1
     devDependencies:
       '@rslib/core':
         specifier: ^0.6.9
@@ -1802,8 +1802,8 @@ packages:
   lodash@4.18.1:
     resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
-  log-md@0.7.0:
-    resolution: {integrity: sha512-rVX8kEM7lo4+vLvlyUl8tbT7nyLDarJIqA43VbQ1Rn7hrY9t/wsYfJyVYDAwyzRpPmzbrVTyaQlHQAGFqwK8wg==}
+  log-md@0.7.1:
+    resolution: {integrity: sha512-uJWgknhjuXIT+jK78+etlsTIMTHYAu0/bp+gyIDmDrZZfp8xrUGJM5/yZYPGj5QxHmmy3Y3nnkSHK02NVJi/Zg==}
     engines: {node: '>=18'}
 
   loose-envify@1.4.0:
@@ -1944,8 +1944,8 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
-  pintor@0.2.0:
-    resolution: {integrity: sha512-+7nGTEuNbacl9Qy9OiydkrTtAp9aVDP3gOPwgKPvhMWDPnbpRMJYhfWrB35daaYqJIq1B2blpCifIm/Eqw+HrQ==}
+  pintor@0.3.1:
+    resolution: {integrity: sha512-ZqE4JiWQ/MLr+goIMM/0Ar0bNcVBSNTpIYAbJtdp4NGqtT8byafVATivHZo4B5a6fsC8kWtgZk5p57MIUFUXiA==}
     engines: {node: '>=14.0.0'}
 
   possible-typed-array-names@1.1.0:
@@ -4168,12 +4168,12 @@ snapshots:
 
   lodash@4.18.1: {}
 
-  log-md@0.7.0:
+  log-md@0.7.1:
     dependencies:
       dedent: 1.7.2
       marked: 4.3.0
       marked-terminal: 5.2.0(marked@4.3.0)
-      pintor: 0.2.0
+      pintor: 0.3.1
     transitivePeerDependencies:
       - babel-plugin-macros
 
@@ -4311,7 +4311,7 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  pintor@0.2.0: {}
+  pintor@0.3.1: {}
 
   possible-typed-array-names@1.1.0: {}
 
