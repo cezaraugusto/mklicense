@@ -4,10 +4,12 @@
 [npm-downloads-url]: https://www.npmjs.com/package/mklicense
 [action-image]: https://github.com/cezaraugusto/mklicense/actions/workflows/ci.yml/badge.svg?branch=main
 [action-url]: https://github.com/cezaraugusto/mklicense/actions
+[provenance-image]: https://img.shields.io/badge/provenance-verified-0971fe?logo=npm&logoColor=white
+[provenance-url]: https://www.npmjs.com/package/mklicense
 
 > CLI tool for building Licenses files. Easily.
 
-# mklicense [![Version][npm-version-image]][npm-version-url] [![Downloads][npm-downloads-image]][npm-downloads-url] [![workflow][action-image]][action-url]
+# mklicense [![Version][npm-version-image]][npm-version-url] [![Downloads][npm-downloads-image]][npm-downloads-url] [![workflow][action-image]][action-url] [![provenance][provenance-image]][provenance-url]
 
 <br>
 <p align="center"><img src="demo.gif" width="640" height="400"></p>
