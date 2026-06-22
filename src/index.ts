@@ -111,7 +111,7 @@ export default async function run (): Promise<void> {
       message:
         "Give the project's name and a brief idea of what it does (one line):",
       default:
-        "mkdocs. A CLI tool that generates your next project's License. Available on NPM."
+        "mklicense. A CLI tool that generates your next project's License. Available on NPM."
     })
   }
 
