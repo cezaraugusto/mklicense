@@ -67,7 +67,7 @@ jobs:
             echo "Error: tag v$VERSION already exists on origin. Choose a new version." >&2
             exit 1
           fi
-          npm version "$VERSION" -m "release: %s"
+          npm version "$VERSION" -m "Release %s"
           git push --follow-tags
           npm publish --provenance --access public
 
