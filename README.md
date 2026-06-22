@@ -13,36 +13,35 @@
 <p align="center"><img src="demo.gif" width="640" height="400"></p>
 <br>
 
-## Stay Tuned :star: :star: :star: :star: :star: 
-
-v. `1.0` is coming!
-
-* `mklicense` will behave like an old school text-based game, to drive you to which license suits best for your project (thanks [Jerod Santo](https://github.com/jerodsanto) for the idea). But still keeping its value as-is, behaving like a straight-to-the-point tool.
-
-
 ## Why should I use this?
 
-* Licenses are boring;
-* Copy/paste stuff is so 1999;
-* The GitHub `LICENSE` generator doesn't necessarily includes your information inside the file;
-* It's busy people/beginner's friendly. It doesn't have all those flags to just install a license;
-* You shouldn't trust other people to store your `LICENSE` sources. `LICENSE`s are sensible.
+* It writes your details (year, author, project description) into the file, which the GitHub generator does not always do.
+* It is friendly for beginners and busy people: no flags to memorize, just answer a couple of prompts.
+* It generates the file locally, so you never hand your `LICENSE` details to a third-party service.
 
 
 ## Install
 
-```
-$ npm install -g mklicense
+```bash
+npm install -g mklicense
 ```
 
 
 ## Usage
 
-```
-$ mklicense
+Run the command inside your project folder:
+
+```bash
+mklicense
 ```
 
-Since its version 0.1.4, `mklicense` needs `Node` version `>=4` to run properly.
+The CLI walks you through a short interactive flow:
+
+1. Select a license from the list (see below).
+2. For MIT, Apache, GPL and AGPL, enter the starting year and the author name (both prefilled, the author defaults to your `git config user.name`).
+3. For GPL and AGPL, enter a one-line project description.
+
+`mklicense` then writes a `LICENSE` file in the current directory. It is fully interactive and takes no command-line flags. Requires `Node` `>=18`.
 
 
 ## Related projects
@@ -67,7 +66,7 @@ Since its version 0.1.4, `mklicense` needs `Node` version `>=4` to run properly.
 
 ## You talk about trust. So, where are all the licenses located?
 
-`mklicense` extracts licenses from http://choosealicense.com/ (which is [curated by GitHub](http://choosealicense.com/about/)), and creates a `.txt` file for your desired project. I have no control over any license, which is a good thing for you and me.
+`mklicense` extracts licenses from https://choosealicense.com/ (which is [curated by GitHub](https://choosealicense.com/about/)), and creates a `LICENSE` file for your desired project. I have no control over any license, which is a good thing for you and me.
 
 
 ## License
