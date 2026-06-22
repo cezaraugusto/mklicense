@@ -1,6 +1,6 @@
 {
   "name": "mklicense",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "CLI tool for building Licenses files. Easily.",
   "license": "MIT",
   "repository": "cezaraugusto/mklicense",
