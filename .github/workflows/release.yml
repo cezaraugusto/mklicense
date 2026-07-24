@@ -30,6 +30,12 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
 
+      - name: Upgrade npm for trusted publishing
+        run: |
+          # Trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 ships npm 10.x
+          npm install -g npm@latest
+          npm --version
+
       - name: Install dependencies (allow lockfile update)
         run: pnpm install --no-frozen-lockfile
 
@@ -46,9 +52,8 @@ jobs:
           # If pnpm updated the lockfile, restore it to keep the tree clean for versioning
           git restore --source=HEAD --staged --worktree pnpm-lock.yaml || git checkout -- pnpm-lock.yaml || true
 
-      - name: Publish using np with provenance
+      - name: Publish with npm trusted publishing
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
         run: |
@@ -70,4 +75,3 @@ jobs:
           npm version "$VERSION" -m "Release %s"
           git push --follow-tags
           npm publish --provenance --access public
-
