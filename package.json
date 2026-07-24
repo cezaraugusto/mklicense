@@ -58,15 +58,15 @@
   "dependencies": {
     "@inquirer/prompts": "^8.5.2",
     "cli-spinner": "^0.2.10",
-    "log-md": "^0.7.2"
+    "log-md": "^0.7.5"
   },
   "devDependencies": {
-    "@rslib/core": "^0.23.0",
-    "@types/node": "^25.9.3",
-    "eslint": "^10.5.0",
-    "eslint-config-auditor": "^2.3.1",
+    "@rslib/core": "^0.23.2",
+    "@types/node": "^26.1.1",
+    "eslint": "^10.8.0",
+    "eslint-config-auditor": "^3.0.0",
     "typescript": "^6.0.3",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.10"
   },
   "packageManager": "pnpm@9.9.0",
   "pnpm": {
