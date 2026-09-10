@@ -61,7 +61,7 @@
     "log-md": "^0.7.5"
   },
   "devDependencies": {
-    "@rslib/core": "^0.23.2",
+    "@rslib/core": "^1.0.0",
     "@types/node": "^26.1.1",
     "eslint": "^10.8.0",
     "eslint-config-auditor": "^3.0.0",
